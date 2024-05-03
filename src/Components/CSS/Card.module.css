@@ -1,0 +1,138 @@
+.card {
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  padding: 1.5rem;
+  padding-top: 1rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+/*Hover*/
+.card:hover {
+  border-color: #008bf8;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+.card_input {
+  margin-bottom: 0.5rem;
+ 
+  height: 32px;
+  background-color: #05060f0a;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s,
+    background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.card_label {
+  margin: 0.2rem;
+  padding: auto;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #05060f99;
+  transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.card_input :hover,
+.input:focus,
+.input-group:hover .input {
+  outline: none;
+  border-color: #05060f;
+}
+
+.card_btn {
+  margin-left: 0.5rem;
+  display: inline-block;
+  background: #e4f1cc;
+  padding: 0.4em 0.8em; /* Adjust padding for smaller size */
+  border-radius: 4px; /* Adjust border radius for smaller size */
+  box-shadow: 1px 1px 2px -1px rgba(0, 0, 0, 0.15),
+    -1px -1px 2px -1px rgba(255, 255, 255, 0.7); /* Adjust box shadow for smaller size */
+  border: 1px solid rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: transform 0.3s;
+  font-size: 0.8rem; /* Adjust font size for smaller size */
+}
+
+.card_btn:hover {
+  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+    -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+    0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: translateY(0.5em);
+}
+
+.card_btn svg {
+  transition: transform 0.5s;
+}
+
+.card_btn:hover svg {
+  transform: scale(0.9);
+  fill: #333333;
+}
+
+.card_completed {
+  border-color: green;
+  background-color: #f0f0f0;
+  justify-content: space-between;
+}
+
+.card_not_completed {
+  border-color: red;
+  background-color: #f0f0f0;
+  justify-content: space-between;
+}
+
+/* let all the other_data be pop below the card */
+.other_data {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: contents;
+  flex-direction: row;
+  justify-content: left;
+  align-items: end;
+  padding: 1rem;
+  margin: 1rem;
+  background:#008bf8;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+  background:#dee9f1;
+  height: 200px;
+  overflow-y: auto;
+  border: #4d4d4e 1px solid;
+  
+
+}
+
+.item_card {
+  flex: 1 0 calc(33.333% - 20px); /* Adjust the width as needed */
+  max-width: max-content;
+  margin: 10px; /* Adjust margin as needed */
+  padding: 1rem;
+  border-radius: 20px;
+  background: #f5f5f5;
+  position: relative;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+}
