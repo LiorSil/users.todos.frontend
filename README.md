@@ -1,4 +1,4 @@
-# Project Readme
+# Users Todos & Posts
 
 This project is a React-based web application that interacts with server data provided by the following endpoints:
 - Users: [https://jsonplaceholder.typicode.com/users](https://jsonplaceholder.typicode.com/users)
