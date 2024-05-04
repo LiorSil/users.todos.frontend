@@ -1,14 +1,15 @@
-/** TodoComp page*/
-import React from "react";
+
 import PropTypes from "prop-types";
 import classes from "./CSS/Card.module.css";
 
 const Todo = ({ id, title, completed, onMarkTodoAsCompleted }) => {
-  const borderColor = completed
-    ? { border: "2px solid green", backgroundColor: "MediumSeaGreen" }
-    : { border: "2px solid red" };
+  const todoStyle = {
+    border: `2px solid ${completed ? "green" : "red"}`,
+    backgroundColor: completed ? "MediumSeaGreen" : "",
+  };
+
   return (
-    <div className={classes.item_card} style={borderColor}>
+    <div className={classes.item_card} style={todoStyle}>
       <h1 className={classes.card_label}>
         Title:<span className={classes.item_value}> {title}</span>
       </h1>

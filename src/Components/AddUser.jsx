@@ -1,6 +1,5 @@
-import React from "react";
-import classes from "./CSS/Card.module.css";
 import { useState } from "react";
+import classes from "./CSS/Card.module.css";
 import Card from "./Card";
 import { isEmailValid, isNameValid } from "../Utils/validators";
 
@@ -20,41 +19,44 @@ const AddUser = ({ onCancelAddUser, onAddUser }) => {
       return { ...prev, [e.target.id]: e.target.value };
     });
   };
-  const addUserHandler = () => {
-    //validate name and email
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Validate inputs
     if (!newUserData.name || !newUserData.email) {
       alert("Name and email are required");
       return;
-    } else if (
-      !newUserData.city ||
-      !newUserData.street ||
-      !newUserData.zipcode
-    ) {
-      alert("City, street and zipcode are required");
+    }
+    if (!newUserData.city || !newUserData.street || !newUserData.zipcode) {
+      alert("City, street, and zipcode are required");
       return;
-    } else if (!isNameValid(newUserData.name)) {
+    }
+    if (!isNameValid(newUserData.name)) {
       alert("Name is invalid");
       return;
-    } else if (!isEmailValid(newUserData.email)) {
+    }
+    if (!isEmailValid(newUserData.email)) {
       alert("Email is invalid");
       return;
-    } else {
-      onAddUser({
-        id: Math.floor(Math.random() * 1000),
-        name: newUserData.name,
-        email: newUserData.email,
-        address: {
-          city: newUserData.city,
-          street: newUserData.street,
-          zipcode: newUserData.zipcode,
-        },
-      });
     }
+
+    // Add user
+    onAddUser({
+      id: Math.floor(Math.random() * 1000),
+      name: newUserData.name,
+      email: newUserData.email,
+      address: {
+        city: newUserData.city,
+        street: newUserData.street,
+        zipcode: newUserData.zipcode,
+      },
+    });
   };
 
   return (
     <Card className={classes.card}>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={onSubmitHandler}>
         <div className={classes.group}>
           <label htmlFor="name">Name</label>
           <input type="text" id="name" required onChange={onChangeHandler} />
@@ -77,16 +79,10 @@ const AddUser = ({ onCancelAddUser, onAddUser }) => {
         </div>
 
         <div className={classes.group}>
-          <button
-            style={{ backgroundColor: "green" }}
-            className={classes.card_btn}
-            type="button"
-            onClick={addUserHandler}
-          >
+          <button className={classes.card_btn} type="submit">
             Add User
           </button>
           <button
-            style={{ backgroundColor: "red" }}
             className={classes.card_btn}
             type="button"
             onClick={onCancelAddUser}

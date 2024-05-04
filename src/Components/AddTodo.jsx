@@ -1,10 +1,18 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import classes from "./CSS/Card.module.css";
-import { useState } from "react";
 
 const AddTodo = ({ onAddTodo, onClickCancel }) => {
   const [title, setTitle] = useState("");
+
+  const handleAddTodo = () => {
+    if (!title) {
+      // Display a more user-friendly validation message
+      alert("Please fill out all fields");
+      return;
+    }
+    onAddTodo(title);
+  };
 
   return (
     <div className={classes.item_card}>
@@ -19,13 +27,7 @@ const AddTodo = ({ onAddTodo, onClickCancel }) => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <br />
-      <button
-        className={classes.card_btn}
-        onClick={() => {
-          if (!title) return alert("Please fill out all fields");
-          onAddTodo(title)
-        }}
-      >
+      <button className={classes.card_btn} onClick={handleAddTodo}>
         Add Todo
       </button>
       <button className={classes.card_btn} onClick={onClickCancel}>
@@ -36,7 +38,6 @@ const AddTodo = ({ onAddTodo, onClickCancel }) => {
 };
 
 AddTodo.propTypes = {
-   
   onAddTodo: PropTypes.func.isRequired,
   onClickCancel: PropTypes.func.isRequired,
 };

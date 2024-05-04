@@ -1,6 +1,4 @@
-import React from "react";
-import { useState } from "react";
-
+import  { useState } from "react";
 import PropTypes from "prop-types";
 import classes from "./CSS/Card.module.css";
 import Card from "./Card";
@@ -27,14 +25,17 @@ const User = ({
 }) => {
   const [isOtherDataWindowOpen, setIsOtherDataWindowOpen] = useState(false);
   const [userDetails, setUserDetails] = useState({ name, email });
-  const [isPostClicked, setIsPostClicked] = useState(false);
-  const [isTodoClicked, setIsTodoClicked] = useState(false);
+  const [isDataClicked, setIsDataClicked] = useState(null);
 
-  const toggleOtherDataWindow = () => {
-    setIsOtherDataWindowOpen(!isOtherDataWindowOpen);
+  const toggleOtherDataWindow = (status) => {
+    setIsOtherDataWindowOpen(status);
   };
 
-  const onAddTodoHandler = (title) => {
+  const handleUpdateUser = () => {
+    onUpdateUser(id, userDetails.name, userDetails.email);
+  };
+
+  const handleAddTodo = (title) => {
     const todo = {
       userId: id,
       id: Math.floor(Math.random() * 1000),
@@ -44,7 +45,7 @@ const User = ({
     onAddTodo(todo);
   };
 
-  const onAddPostHandler = (title, body) => {
+  const handleAddPost = (title, body) => {
     const post = {
       userId: id,
       id: Math.floor(Math.random() * 1000),
@@ -54,76 +55,41 @@ const User = ({
     onAddPost(post);
   };
 
-  const UserTP = (
-    <div style={{ display: "block" }}>
-      <button
-        onClick={() => {
-          setIsTodoClicked(true);
-        }}
-        className={classes.card_btn}
-      >
-        Add Todo
-      </button>
-      <TodosList todos={todos} onMarkTodoAsCompleted={onMarkTodoAsCompleted} />
-      <button
-        onClick={() => {
-          setIsPostClicked(true);
-        }}
-        className={classes.card_btn}
-      >
-        Add Post
-      </button>
-      <PostsList
-        posts={posts}
-        onAddPost={() => {
-          return;
-        }}
-      />
-    </div>
-  );
-
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <Card selected={selected}>
+        {/* User details */}
         <label
           className={classes.card_label}
           onClick={() => onSelectUser(id)}
           style={{ cursor: "pointer" }}
         >
-          user ID:{" "}
+          User ID: {id}
         </label>
         <input
           className={classes.card_input}
           style={{ background: "lightgrey" }}
           type="text"
-          defaultValue={id}
-          disabled
-        />
-        <label className={classes.card_label}>Name: </label>
-        <input
-          className={classes.card_input}
-          type="text"
-          defaultValue={userDetails.name}
+          value={userDetails.name}
           onChange={(e) =>
             setUserDetails({ ...userDetails, name: e.target.value })
           }
         />
-        <label className={classes.card_label}>Email: </label>
         <input
           className={classes.card_input}
           type="text"
-          defaultValue={userDetails.email}
+          value={userDetails.email}
           onChange={(e) =>
             setUserDetails({ ...userDetails, email: e.target.value })
           }
         />
-        <div>
-          {/* OtherData Button */}
+
+        {/* Other Data */}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <button
             className={classes.card_btn}
-            //add background color to button
             style={{ backgroundColor: "LightGrey" }}
-            onMouseOver={() => setIsOtherDataWindowOpen(true)}
+            onMouseOver={() => toggleOtherDataWindow(true)}
           >
             Other Data
           </button>
@@ -132,44 +98,68 @@ const User = ({
               street={address.street}
               city={address.city}
               zipcode={address.zipcode}
-              onClickOtherData={toggleOtherDataWindow}
-            ></OtherData>
+              onClickOtherData={() => toggleOtherDataWindow(false)}
+            />
           )}
-          {/*  Update Button */}
-          <button
-            className={classes.card_btn}
-            id={id}
-            onClick={() =>
-              onUpdateUser(id, userDetails.name, userDetails.email)
-            }
-          >
+          {/* Buttons */}
+
+          <button className={classes.card_btn} onClick={handleUpdateUser}>
             Update
           </button>
-          {/* Delete Button */}
-          <button
-            className={classes.card_btn}
-            id={id}
-            onClick={() => onDeleteUser(id)}
-          >
+          <button className={classes.card_btn} onClick={() => onDeleteUser(id)}>
             Delete
           </button>
         </div>
       </Card>
-      {/* case1 : click the ID present todos & post  */}
-      {selected && !isPostClicked && !isTodoClicked && UserTP}
-      {/* case2 : click the Add Todo button */}
-      {selected && isTodoClicked && (
-        <AddTodo
-          onClickCancel={() => setIsTodoClicked(false)}
-          onAddTodo={onAddTodoHandler}
-        />
-      )}
-      {/* case3 : click the Add Post button */}
-      {selected && isPostClicked && (
-        <AddPost
-          onClickCancel={() => setIsPostClicked(false)}
-          onAddPost={onAddPostHandler}
-        />
+      {/* User actions */}
+      {selected && (
+        <div style={{ display: "block" }}>
+          {/* Add Todo button */}
+          {isDataClicked !== "Todo" && isDataClicked !== "Post" && (
+            <button
+              className={classes.card_btn}
+              onClick={() => setIsDataClicked("Todo")}
+            >
+              Add Todo
+            </button>
+          )}
+          {/* Add Post button */}
+          {isDataClicked !== "Todo" && isDataClicked !== "Post" && (
+            <button
+              className={classes.card_btn}
+              onClick={() => setIsDataClicked("Post")}
+            >
+              Add Post
+            </button>
+          )}
+          {/* Render AddTodo or AddPost component based on the mode */}
+          {(isDataClicked === "Todo" || isDataClicked === "Post") && (
+            <>
+              {isDataClicked === "Todo" && (
+                <AddTodo
+                  onClickCancel={() => setIsDataClicked(null)}
+                  onAddTodo={handleAddTodo}
+                />
+              )}
+              {isDataClicked === "Post" && (
+                <AddPost
+                  onClickCancel={() => setIsDataClicked(null)}
+                  onAddPost={handleAddPost}
+                />
+              )}
+            </>
+          )}
+          {/* Render TodosList and PostsList if neither Todo nor Post mode is active */}
+          {isDataClicked !== "Todo" && isDataClicked !== "Post" && (
+            <>
+              <TodosList
+                todos={todos}
+                onMarkTodoAsCompleted={onMarkTodoAsCompleted}
+              />
+              <PostsList posts={posts} />
+            </>
+          )}
+        </div>
       )}
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useState } from 'react';
 import Card from "./Components/Card";
 import classes from "./Components/CSS/Card.module.css";
@@ -19,26 +19,34 @@ import AddUser from "./Components/AddUser";
 const App = () => {
   const [search, setSearch] = useState("");
   const [toggleAddUser, setToggleAddUser] = useState(false);
-  const [data, setData] = useState({ users, posts, todos });
+  const [userData, setUserData] = useState({ users, posts, todos });
 
   const addUserHandler = (user) => {
-    const ok = confirm("Are you sure you want to add this user?");
-    if (!ok) return;
-    const newUsers = addUserToUsers(data.users, user);
-    setData({ users: newUsers, posts: data.posts, todos: data.todos });
+    const confirmation = window.confirm(
+      "Are you sure you want to add this user?"
+    );
+    if (!confirmation) return;
+    const newUsers = addUserToUsers(userData.users, user);
+    setUserData({
+      users: newUsers,
+      posts: userData.posts,
+      todos: userData.todos,
+    });
     alert("User added successfully");
   };
 
   const deleteUsersHandler = (userId) => {
     const [newUsers, newPosts, newTodos] = deleteUser(
       userId,
-      data.users,
-      data.posts,
-      data.todos
+      userData.users,
+      userData.posts,
+      userData.todos
     );
-    const ok = confirm("Are you sure you want to delete this user?");
-    if (!ok) return;
-    setData({ users: newUsers, posts: newPosts, todos: newTodos });
+    const confirmation = window.confirm(
+      "Are you sure you want to delete this user?"
+    );
+    if (!confirmation) return;
+    setUserData({ users: newUsers, posts: newPosts, todos: newTodos });
     alert("User deleted successfully");
   };
   const updateUsersHandler = (userId, name, email) => {
@@ -47,31 +55,53 @@ const App = () => {
       alert("Name and email are required");
       return;
     }
-    const updatedUsers = updateUser(userId, data.users, name, email);
-    const ok = confirm("Are you sure you want to update this user?");
-    if (!ok) return;
-    setData({ users: updatedUsers, posts: data.posts, todos: data.todos });
+    const updatedUsers = updateUser(userId, userData.users, name, email);
+    const confirmation = window.confirm(
+      "Are you sure you want to update this user?"
+    );
+    if (!confirmation) return;
+    setUserData({
+      users: updatedUsers,
+      posts: userData.posts,
+      todos: userData.todos,
+    });
     alert("User updated successfully");
   };
 
   const onMarkTodoAsCompletedHandler = (todoId) => {
-    const updatedTodos = markTodoAsCompleted(todoId, data.todos);
-    setData({ users: data.users, posts: data.posts, todos: updatedTodos });
+    const updatedTodos = markTodoAsCompleted(todoId, userData.todos);
+    setUserData({
+      users: userData.users,
+      posts: userData.posts,
+      todos: updatedTodos,
+    });
   };
 
   const onAddTodoHandler = (todo) => {
-    const ok = confirm("Are you sure you want to add this todo?");
-    if (!ok) return;
-    const updatedTodos = addTodoToUser(data.todos, todo);
-    setData({ users: data.users, posts: data.posts, todos: updatedTodos });
+    const confirmation = window.confirm(
+      "Are you sure you want to add this todo?"
+    );
+    if (!confirmation) return;
+    const updatedTodos = addTodoToUser(userData.todos, todo);
+    setUserData({
+      users: userData.users,
+      posts: userData.posts,
+      todos: updatedTodos,
+    });
     alert("Todo added successfully");
   };
 
   const onAddPostHandler = (post) => {
-    const ok = confirm("Are you sure you want to add this post?");
-    if (!ok) return;
-    const updatedPosts = addPostToUser(data.posts, post);
-    setData({ users: data.users, posts: updatedPosts, todos: data.todos });
+    const confirmation = window.confirm(
+      "Are you sure you want to add this post?"
+    );
+    if (!confirmation) return;
+    const updatedPosts = addPostToUser(userData.posts, post);
+    setUserData({
+      users: userData.users,
+      posts: updatedPosts,
+      todos: userData.todos,
+    });
     alert("Post added successfully");
   };
 
@@ -100,12 +130,12 @@ const App = () => {
         </Card>
       </div>
       <UsersList
-        users={data.users}
+        users={userData.users}
         searchFilter={search}
         onDeleteUser={deleteUsersHandler}
         onUpdateUser={updateUsersHandler}
-        todos={data.todos}
-        posts={data.posts}
+        todos={userData.todos}
+        posts={userData.posts}
         onAddPost={onAddPostHandler}
         onMarkTodoAsCompleted={onMarkTodoAsCompletedHandler}
         onAddTodo={onAddTodoHandler}

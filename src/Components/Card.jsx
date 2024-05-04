@@ -1,11 +1,10 @@
-import React from "react";
 import classes from "./CSS/Card.module.css";
 import PropTypes from "prop-types";
 
-const Card = ({ children, selected, ...props }) => {
+const Card = ({ children, selected }) => {
   return (
     <div
-      className={`${classes.card} ${classes[props.className]}`}
+      className={`${classes.card}`}
       style={{ backgroundColor: selected ? "#f8cbad" : "white" }}
     >
       {children}
@@ -15,7 +14,7 @@ const Card = ({ children, selected, ...props }) => {
 
 Card.propTypes = {
   selected: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 };
-
 
 export default Card;
