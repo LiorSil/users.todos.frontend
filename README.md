@@ -37,3 +37,26 @@ This project is a React-based web application that interacts with server data pr
 - Additional data, such as "Other Data", is not provided during user creation but only during user data updates.
 
 This React application manages a client-side "Database" initialized with server data from the provided endpoints and implements various functionalities based on the specified requirements.
+## How to Run
+
+### Prerequisites:
+- Node.js installed on your system
+- npm or yarn package manager
+
+### Steps:
+
+1. **Clone the repository:**
+   git clone <repository_url>
+
+2. **Navigate to the project directory:**
+  cd <project_directory>
+
+3. **Install dependencies:**
+  npm install
+
+4. **Run the development server:**
+   npm run dev
+
+
+
+
