@@ -84,7 +84,7 @@ const User = ({
 
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <Card>
+      <Card selected={selected}>
         <label
           className={classes.card_label}
           onClick={() => onSelectUser(id)}

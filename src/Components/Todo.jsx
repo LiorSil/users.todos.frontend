@@ -12,7 +12,10 @@ const Todo = ({ id, title, completed, onMarkTodoAsCompleted }) => {
       <h1 className={classes.card_label}>
         Title:<span className={classes.item_value}> {title}</span>
       </h1>
-      <label className={classes.card_label}>
+      <label
+        className={classes.card_label}
+        style={{ color: !completed ? "red" : "" }}
+      >
         Completed: {completed ? "Yes" : "No"}
       </label>
       {!completed && (

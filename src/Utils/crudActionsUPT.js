@@ -1,3 +1,7 @@
+const addUserToUsers = (users, user) => {
+  return [...users, user];
+};
+
 const deleteUser = (usersId, users, posts, todos) => {
   const newUsers = users.filter((user) => user.id !== usersId);
   const newPosts = posts.filter((post) => post.userId !== usersId);
@@ -41,5 +45,13 @@ const addPostToUser = (posts, post) => {
   return [...posts, post];
 };
 
-
-export { deleteUser, updateUser, getUserTodos, getUserPosts, markTodoAsCompleted , addTodoToUser, addPostToUser};
+export {
+  deleteUser,
+  updateUser,
+  getUserTodos,
+  getUserPosts,
+  markTodoAsCompleted,
+  addTodoToUser,
+  addPostToUser,
+  addUserToUsers,
+};

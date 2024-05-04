@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./CSS/Card.module.css";
+import PropTypes from "prop-types";
 
 const Card = ({ children, selected, ...props }) => {
   return (
@@ -11,5 +12,10 @@ const Card = ({ children, selected, ...props }) => {
     </div>
   );
 };
+
+Card.propTypes = {
+  selected: PropTypes.bool,
+};
+
 
 export default Card;

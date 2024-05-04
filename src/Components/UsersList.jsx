@@ -53,7 +53,7 @@ const UsersList = ({
           onMarkTodoAsCompleted={onMarkTodoAsCompleted}
           onAddTodo={onAddTodo}
           posts={getUserPosts(user.id, posts)}
-            onAddPost={onAddPost}
+          onAddPost={onAddPost}
         />
       );
     });
