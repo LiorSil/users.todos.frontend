@@ -46,7 +46,7 @@ This React application manages a client-side "Database" initialized with server 
 ### Steps:
 
 1. **Clone the repository:**
-   git clone [<repository_url>](https://github.com/LiorSil/users.todos.frontend.git)
+   git clone https://github.com/LiorSil/users.todos.frontend.git
 
 2. **Navigate to the project directory:**
   cd <project_directory>
