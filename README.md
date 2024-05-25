@@ -5,6 +5,9 @@ This project is a React-based web application that interacts with server data pr
 - Posts: [https://jsonplaceholder.typicode.com/posts](https://jsonplaceholder.typicode.com/posts)
 - Todos: [https://jsonplaceholder.typicode.com/todos](https://jsonplaceholder.typicode.com/todos)
 
+  ## Video 
+  [Link To the Video](https://drive.google.com/file/d/1MjNdE88UxPXxvUQ74oK8V5mgrlR1B3fo/view?usp=drive_link)
+
 ## Case 1: Application Starts
 - Upon application start, the UI presents all the users' data, ordered by user ID.
 - Users with uncompleted tasks (todos) are marked with a red border, while others are marked with a green border.
